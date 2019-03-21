@@ -50,14 +50,13 @@ public class MyDeque<E>{
 
   public void addFirst(E element){}
   public void addLast(E element){
-    if (end != data.length - 1) {
+    if (end != data.length -1) {
       data[end +1] = element;
       end++;
     }
     else {
       end = 0;
       data[end] = element;
-      end++;
     }
   }
   /*public E removeFirst(){ }
@@ -73,5 +72,14 @@ public class MyDeque<E>{
     System.out.println(s.start); //still 5
     System.out.println(s.end); //now 7
     System.out.println(s); //[5,12]
+    s.addLast(2);//end is 8
+    s.addLast(2); //end is 9
+    s.addLast(6); //end is 0
+    s.addLast(2); //end is 1
+    s.addLast(2); //end is 2
+    s.addLast(2); //end is 3;
+    System.out.println(s.end);
+    System.out.println(s);
+
   }
 }
