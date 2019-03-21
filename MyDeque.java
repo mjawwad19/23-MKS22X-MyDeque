@@ -50,14 +50,15 @@ public class MyDeque<E>{
 
   public void addFirst(E element){}
   public void addLast(E element){
-    if (end != data.length -1) {
+    if (end != data.length -1 && end != start-1) {
       data[end +1] = element;
       end++;
     }
-    else {
+    else if (start != 0) {
       end = 0;
       data[end] = element;
     }
+    else System.out.println("no space");
   }
   /*public E removeFirst(){ }
   public E removeLast(){ }
@@ -80,6 +81,8 @@ public class MyDeque<E>{
     s.addLast(2); //end is 3;
     System.out.println(s.end);
     System.out.println(s);
+    s.addLast(3); //end is 4... spicy time
+    s.addLast(3); //no space
 
   }
 }
