@@ -116,7 +116,8 @@ public class MyDeque<E>{
     if (start == data.length -1) {
       start = 0;
     }
-    else start--;
+    else start++;
+    size--;
     return removed;
   }
   public E removeLast(){
@@ -125,6 +126,7 @@ public class MyDeque<E>{
       end = 0;
     }
     else end--;
+    size--;
     return removed;
   }
   public E getFirst(){
