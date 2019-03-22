@@ -1,3 +1,4 @@
+import java.util.*;
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
@@ -71,6 +72,7 @@ public class MyDeque<E>{
 
   //basically same as addLast but start vs end
   public void addFirst(E element){
+    if (element == null) throw new NullPointerException("deque does not permit null elements");
     if (start == 0) {
       if (end != data.length -1) {
         start = data.length -1;
@@ -89,6 +91,7 @@ public class MyDeque<E>{
   size++;
 }
   public void addLast(E element){
+    if (element == null) throw new NullPointerException("deque does not permit null elements");
     if (size == 0) data[end] = element; //free for all
     else if (size == data.length) {
       resize();
@@ -112,6 +115,7 @@ public class MyDeque<E>{
     size++;
   }
   public E removeFirst(){
+    if (size == 0) throw new NoSuchElementException("deque is empty");
     E removed = data[start];
     if (start == data.length -1) {
       start = 0;
@@ -121,6 +125,7 @@ public class MyDeque<E>{
     return removed;
   }
   public E removeLast(){
+    if (size == 0) throw new NoSuchElementException("deque is empty");
     E removed = data[end];
     if (end == data.length -1) {
       end = 0;
@@ -133,9 +138,11 @@ public class MyDeque<E>{
     return removed;
   }
   public E getFirst(){
+    if (size == 0) throw new NoSuchElementException("deque is empty");
     return data[start];
   }
   public E getLast(){
+    if (size == 0) throw new NoSuchElementException("deque is empty");
     return data[end];
   }
 
