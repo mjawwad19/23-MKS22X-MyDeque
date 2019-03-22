@@ -73,8 +73,25 @@ public class MyDeque<E>{
   }
 
 
-
-  public void addFirst(E element){}
+  //basically same as addLast but start vs end
+  public void addFirst(E element){
+    if (start == 0) {
+      if (end != data.length -1) {
+        start =data.length -1;
+        data[data.length - 1] = element;
+      }
+    else {
+      resize();
+      start--;
+      data[start] = element;
+    }
+  }
+  else {
+    start --;
+    data[start] = element;
+  }
+  size++;
+}
   public void addLast(E element){
     if (size == 0) data[end] = element; //free for all
     else if (size == data.length) {
@@ -119,8 +136,9 @@ public class MyDeque<E>{
     s.addLast(2); //end is 3;
     System.out.println(s.end);
     System.out.println(s);
-    s.addLast(3); //end is 4... spicy time
-    s.addLast(3); //no space
+    s.addFirst(40);
+    System.out.println(s.start);
+    System.out.println(s);
 
   }
 }
