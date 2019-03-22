@@ -125,6 +125,9 @@ public class MyDeque<E>{
     if (end == data.length -1) {
       end = 0;
     }
+    else if (end == 0) {
+      end = data.length -1;
+    }
     else end--;
     size--;
     return removed;
@@ -141,21 +144,40 @@ public class MyDeque<E>{
     MyDeque<Integer> s = new MyDeque();
     s.addLast(5);
     s.addLast(12);
-    System.out.println(s.start); //still 5
-    System.out.println(s.end); //now 7
-    System.out.println(s); //[5,12]
-    s.addLast(2);//end is 8
-    s.addLast(3); //end is 9
-    s.addLast(6); //end is 0
-    s.addLast(7); //end is 1
-    s.addLast(8); //end is 2
-    s.addLast(9); //end is 3;
-    System.out.println(s.end);
+    s.addLast(2);
+    s.addLast(3);
+    s.addLast(6);
+    s.addLast(7);
+    s.addLast(8);
+    s.addLast(9);
+    System.out.println(s.end); //7
     System.out.println(s);
     s.addFirst(40);
+    System.out.println("Size : " + s.size()); //9
     System.out.println(s.start); //9
-    System.out.println(s); //[40, 4, 12, 2, 3, 6, 7, 8, 9];
+    System.out.println(s); //[40, 5, 12, 2, 3, 6, 7, 8, 9];
     System.out.println(s.getFirst()); //40
+    System.out.println(s.removeFirst()); //40;
+    System.out.println(s); //[5,12,2,3,6,7,8,9];
+    System.out.println("Size : " +  s.size); //8
+    System.out.println(s.removeLast()); //9
+    System.out.println(s); //[5,12,2,3,6,7,8]
+    s.removeLast();
+    System.out.println(s); //[5,12,2,3,6,7]
+    s.removeLast();
+    System.out.println(s); //[5,12,2,3,6]
+    s.removeLast();
+    System.out.println(s); //[5,12,2,3]
+    s.removeLast();
+    System.out.println(s); //[5,12,2]
+    s.removeLast();
+    System.out.println(s); //[5,12]
+    s.removeLast();
+    System.out.println("Size : " +  s.size); //1
+    System.out.println(s); //[5]
+    s.removeFirst();
+    System.out.println(s); //[]
+
 
   }
 }
