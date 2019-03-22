@@ -111,6 +111,29 @@ public class MyDeque<E>{
     }
     size++;
   }
+  public E removeFirst(){
+    E removed = data[start];
+    if (start == data.length -1) {
+      start = 0;
+    }
+    else start--;
+    return removed;
+  }
+  public E removeLast(){
+    E removed = data[end];
+    if (end == data.length -1) {
+      end = 0;
+    }
+    else end--;
+    return removed;
+  }
+  public E getFirst(){
+    return data[start];
+  }
+  public E getLast(){
+    return data[end];
+  }
+
 
   public static void main(String[] args) {
     MyDeque<Integer> s = new MyDeque();
