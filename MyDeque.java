@@ -32,7 +32,7 @@ public class MyDeque<E>{
       }
     }
     else {
-      for (int i = 1; i < size; i++) {
+      for (int i = 0; i < size; i++) {
         if (i + start < data.length) {
           out += data[i+start];
         }
@@ -96,6 +96,7 @@ public class MyDeque<E>{
         data[end] = element; //regular
       }
     }
+    size++;
   }
   /*public E removeFirst(){ }
   public E removeLast(){ }
