@@ -25,23 +25,19 @@ public class MyDeque<E>{
   public String toString(){
     String out = "[";
     if (size == 0) return "[]";
-    if (start <= end) {
-      for (int i = start; i <= end; i++) {
-        out += data[i];
-        if (i != end) out += ", ";
+    if (end <= start) {
+      for (int i = start; i < data.length; i++) {
+        out+= data[i] + ", ";
+      }
+      for (int i = 0; i <= end; i++) {
+        if (i == end) out+= data[i];
+        else out+= data[i] + ", ";
       }
     }
     else {
-      for (int i = 0; i < size; i++) {
-        if (i + start < data.length) {
-          out += data[i+start];
-        }
-        else {
-          out += data[i+start-data.length];
-        }
-        if (i+ start - data.length != end -1) {
-          out += ", ";
-        }
+      for (int i = start; i <= end; i++) {
+        if (i == end) out+= data[i];
+        else out+= data[i] + ", ";
       }
     }
     out += "]";
@@ -77,7 +73,7 @@ public class MyDeque<E>{
   public void addFirst(E element){
     if (start == 0) {
       if (end != data.length -1) {
-        start =data.length -1;
+        start = data.length -1;
         data[data.length - 1] = element;
       }
     else {
@@ -115,11 +111,6 @@ public class MyDeque<E>{
     }
     size++;
   }
-  /*public E removeFirst(){ }
-  public E removeLast(){ }
-  public E getFirst(){ }
-  public E getLast(){ }*/
-
 
   public static void main(String[] args) {
     MyDeque<Integer> s = new MyDeque();
@@ -129,16 +120,17 @@ public class MyDeque<E>{
     System.out.println(s.end); //now 7
     System.out.println(s); //[5,12]
     s.addLast(2);//end is 8
-    s.addLast(2); //end is 9
+    s.addLast(3); //end is 9
     s.addLast(6); //end is 0
-    s.addLast(2); //end is 1
-    s.addLast(2); //end is 2
-    s.addLast(2); //end is 3;
+    s.addLast(7); //end is 1
+    s.addLast(8); //end is 2
+    s.addLast(9); //end is 3;
     System.out.println(s.end);
     System.out.println(s);
     s.addFirst(40);
-    System.out.println(s.start);
-    System.out.println(s);
+    System.out.println(s.start); //9
+    System.out.println(s); //[40, 4, 12, 2, 3, 6, 7, 8, 9];
+    System.out.println(s.getFirst()); //40
 
   }
 }
