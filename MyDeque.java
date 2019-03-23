@@ -26,17 +26,19 @@ public class MyDeque<E>{
   public String toString(){
     String out = "{";
     if (size == 0) return "{}";
-    if (end <= start) {
-      for (int i = start; i < data.length; i++) {
-        out+= data[i] + " ";
-      }
-      for (int i = 0; i <= end; i++) {
-        out+= data[i] + " ";
+    if (start <= end) {
+      for (int i = start; i <= end; i++) {
+        out += data[i] + " ";
       }
     }
     else {
-      for (int i = start; i <= end; i++) {
-        out+= data[i] + " ";
+      for (int i = 0; i < size; i++) {
+        if (i + start < data.length) {
+          out += data[i+ start] + " ";
+        }
+        else {
+          out += data[i + start - data.length] + " "; //to get the left free space being filled by remainder to end
+        }
       }
     }
     out += "}";
