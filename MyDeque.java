@@ -183,6 +183,8 @@ public class MyDeque<E>{
     System.out.println("Size : " +  s.size); //1
     s.removeFirst();
     System.out.println(s); //[]
+    System.out.println(s.removeFirst()); //should through the error NoSuchElementException
+
 
 
   }
