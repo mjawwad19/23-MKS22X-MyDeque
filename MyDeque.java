@@ -26,19 +26,17 @@ public class MyDeque<E>{
   public String toString(){
     String out = "{";
     if (size == 0) return "{}";
-    if (start <= end) {
+    if (start < end) {
       for (int i = start; i <= end; i++) {
         out += data[i] + " ";
       }
     }
     else {
-      for (int i = 0; i < size; i++) {
-        if (i + start < data.length) {
-          out += data[i+ start] + " ";
-        }
-        else {
-          out += data[i + start - data.length] + " "; //to get the left free space being filled by remainder to end
-        }
+      for (int i = start; i < data.length; i++) {
+          out += data[i] + " ";
+      }
+      for (int i = 0; i < end; i++) {
+          out += data[i] + " "; //to get the left free space being filled by remainder to end
       }
     }
     out += "}";
@@ -48,69 +46,52 @@ public class MyDeque<E>{
   @SuppressWarnings("unchecked")
   private void resize() {
     E[] n = (E[]) new Object[(data.length-1) * 2];
-    int in = size -start;
-    if (start <= end) {
+    int in = -1;
+    if (start < end) {
       for (int i = start; i <= end; i++) {
-        n[i] = data[i]; //copy over
+        n[++in] = data[i]; //copy over
       }
     }
     else {
-      for (int i = 0; i < size; i++) {
-        if (i + start < data.length) {
-          n[n.length - (in--)] = data[i+start];
-        }
-        else {
-          n[i + start - data.length] = data[i + start - data.length];
-          //other method of copying over when end is not after start
-        }
+      for (int i = start; i < data.length; i++) {
+          n[++in] = data[i];
       }
-      start = n.length - (size - start);
+      for (int i = 0; i < end; i++) {
+          n[++in] = data[i];
+          //other method of copying over when end is not after start
+      }
     }
     data = n;
+    start = 0;
+    end = in + 1;
   }
 
 
   //basically same as addLast but start vs end
   public void addFirst(E element){
     if (element == null) throw new NullPointerException("deque does not permit null elements");
-    if (start == 0) {
-      if (end != data.length -1) {
-        start = data.length -1;
-        data[data.length - 1] = element;
-      }
-    else {
-      resize();
-      start--;
-      data[start] = element;
+    if (size == data.length) resize();
+    if (size == 0) {
+      if (end == data.length) end =1;
+      else end += 1;
     }
-  }
-  else {
-    start --;
-    data[start] = element;
-  }
+    else if (start == 0) {
+      start = data.length -1;
+    }
+    else start--;
+  data[start] = element;
   size++;
 }
   public void addLast(E element){
     if (element == null) throw new NullPointerException("deque does not permit null elements");
-    if (size == 0) data[end] = element; //free for all
-    else if (size == data.length) {
-      resize();
-      end++;
-      data[end] = element; //necessary since no avaliable space anywehere
-    }
-    else if (start > end) {
-      end++;
-      data[end] = element; //keep going
+    if (size == data.length) resize();
+    if (end == data.length) {
+      data[0] = element;
+      end = 1;
     }
     else {
-      if (end == data.length -1) {
-        end = 0;
-        data[0] = element; //put to front when space avail @ front
-      }
-      else {
-        end++;
-        data[end] = element; //regular
-      }
+      data[end] = element;
+      end++;
     }
     size++;
   }
