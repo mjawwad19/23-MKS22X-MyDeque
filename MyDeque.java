@@ -2,7 +2,7 @@ import java.util.*;
 public class MyDeque<E>{
   private E[] data;
   private int size, start, end;
-
+  //allocates the default space (10) for a deque
   @SuppressWarnings("unchecked")
   public MyDeque(){
     data = (E[])new Object[10];
@@ -10,7 +10,7 @@ public class MyDeque<E>{
     end = 0;
     size = 0;
   }
-
+  //allocates space for a deque of specified size
   @SuppressWarnings("unchecked")
   public MyDeque(int initialCapacity){
     data = (E[]) new Object[initialCapacity];
@@ -18,11 +18,11 @@ public class MyDeque<E>{
     end = 0;
     size = 0;
   }
-
+  //returns how many elements in deque
   public int size(){
     return size;
   }
-
+  //allows us to see the deque
   public String toString(){
     String out = "{";
     if (size == 0) return "{}";
@@ -42,7 +42,7 @@ public class MyDeque<E>{
     out += "}";
     return out;
   }
-
+  //allocates more space for the deque when it is full
   @SuppressWarnings("unchecked")
   private void resize() {
     E[] n = (E[]) new Object[(data.length-1) * 2];
@@ -65,9 +65,7 @@ public class MyDeque<E>{
     start = 0;
     end = in + 1;
   }
-
-
-  //basically same as addLast but start vs end
+  //adds to the start of the deque
   public void addFirst(E element){
     if (element == null) throw new NullPointerException("deque does not permit null elements");
     if (size == data.length) resize();
@@ -79,9 +77,11 @@ public class MyDeque<E>{
       start = data.length -1;
     }
     else start--;
-  data[start] = element;
-  size++;
-}
+    data[start] = element;
+    size++;
+
+  }
+  //adds to the end of the deque
   public void addLast(E element){
     if (element == null) throw new NullPointerException("deque does not permit null elements");
     if (size == data.length) resize();
@@ -95,6 +95,7 @@ public class MyDeque<E>{
     }
     size++;
   }
+  //removes the start element of the deque and returns it
   public E removeFirst(){
     if (size == 0) throw new NoSuchElementException("deque is empty");
     E removed = data[start++];
@@ -102,6 +103,7 @@ public class MyDeque<E>{
     size--;
     return removed;
   }
+  //removes the last element of the deque and returns it;
   public E removeLast(){
     if (size == 0) throw new NoSuchElementException("deque is empty");
     E removed = data[--end];
@@ -109,59 +111,19 @@ public class MyDeque<E>{
     size--;
     return removed;
   }
+  //peeks the start of the deque
   public E getFirst(){
     if (size == 0) throw new NoSuchElementException("deque is empty");
     return data[start];
   }
+  //peeks the end of the deque
   public E getLast(){
     if (size == 0) throw new NoSuchElementException("deque is empty");
     return data[end -1];
   }
 
-
   public static void main(String[] args) {
-    /*MyDeque<Integer> s = new MyDeque<Integer>();
-    s.addLast(5);
-    s.addLast(12);
-    s.addLast(2);
-    s.addLast(3);
-    s.addLast(6);
-    s.addLast(7);
-    s.addLast(8);
-    s.addLast(9);
-    System.out.println(s.end); //7
-    System.out.println(s);
-    s.addFirst(40);
-    System.out.println("Size : " + s.size()); //9
-    System.out.println(s.start); //9
-    System.out.println(s); //[40, 5, 12, 2, 3, 6, 7, 8, 9];
-    System.out.println(s.getFirst()); //40
-    System.out.println(s.removeFirst()); //40;
-    System.out.println(s); //[5,12,2,3,6,7,8,9];
-    System.out.println("Size : " +  s.size); //8
-    System.out.println(s.removeLast()); //9
-    System.out.println(s); //[5,12,2,3,6,7,8]
-    s.removeLast();
-    System.out.println(s); //[5,12,2,3,6,7]
-    s.removeLast();
-    System.out.println(s); //[5,12,2,3,6]
-    s.removeLast();
-    System.out.println(s); //[5,12,2,3]
-    s.removeLast();
-    System.out.println(s); //[5,12,2]
-    s.removeLast();
-    System.out.println(s); //[5,12]
-    s.removeLast();
-    System.out.println(s); //[5]
-    System.out.println("Size : " +  s.size); //1
-    s.removeFirst();
-    System.out.println(s); //[]
-    System.out.println(s.removeFirst()); //should through the error NoSuchElementException*/
     MyDeque<Integer> mD = new MyDeque<Integer>();
-    /*mD.addFirst(0);
-    System.out.println(mD);
-    mD.removeFirst();
-    System.out.println(mD);*/
     for (int i = 0; i < 20; i++) {
       mD.addFirst(i);
       System.out.println(mD);
@@ -170,9 +132,5 @@ public class MyDeque<E>{
       mD.removeFirst();
       System.out.println(mD);
     }
-
-
-
-
   }
 }
