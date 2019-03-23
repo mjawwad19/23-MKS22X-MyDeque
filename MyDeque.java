@@ -147,7 +147,7 @@ public class MyDeque<E>{
 
 
   public static void main(String[] args) {
-    MyDeque<Integer> s = new MyDeque<Integer>();
+    /*MyDeque<Integer> s = new MyDeque<Integer>();
     s.addLast(5);
     s.addLast(12);
     s.addLast(2);
@@ -183,7 +183,17 @@ public class MyDeque<E>{
     System.out.println("Size : " +  s.size); //1
     s.removeFirst();
     System.out.println(s); //[]
-    System.out.println(s.removeFirst()); //should through the error NoSuchElementException
+    System.out.println(s.removeFirst()); //should through the error NoSuchElementException*/
+    MyDeque<Integer> mD = new MyDeque<Integer>();
+    /*mD.addFirst(0);
+    System.out.println(mD);
+    mD.removeFirst();
+    System.out.println(mD);*/
+    for (int i = 0; i < 20; i++) {
+      mD.addFirst(i);
+      System.out.println(mD);
+    }
+
 
 
 
