@@ -27,7 +27,7 @@ public class MyDeque<E>{
     String out = "{";
     if (size == 0) return "{}";
     if (start < end) {
-      for (int i = start; i <= end; i++) {
+      for (int i = start; i < end; i++) {
         out += data[i] + " ";
       }
     }
@@ -48,7 +48,7 @@ public class MyDeque<E>{
     E[] n = (E[]) new Object[(data.length-1) * 2];
     int in = -1;
     if (start < end) {
-      for (int i = start; i <= end; i++) {
+      for (int i = start; i < end; i++) {
         n[++in] = data[i]; //copy over
       }
     }
@@ -97,23 +97,15 @@ public class MyDeque<E>{
   }
   public E removeFirst(){
     if (size == 0) throw new NoSuchElementException("deque is empty");
-    E removed = data[start];
-    if (start == data.length -1 && size != 1) {
-      start = 0;
-    }
-    else if (size != 1) {
-      start++;
-    }
+    E removed = data[start++];
+    if (start == data.length) start = 0;
     size--;
     return removed;
   }
   public E removeLast(){
     if (size == 0) throw new NoSuchElementException("deque is empty");
-    E removed = data[end];
-    if (end == 0 && size != 1) end = data.length -1;
-    else if (size != 1) {
-      end--;
-    }
+    E removed = data[--end];
+    if (end == 0) end = data.length;
     size--;
     return removed;
   }
@@ -172,6 +164,10 @@ public class MyDeque<E>{
     System.out.println(mD);*/
     for (int i = 0; i < 20; i++) {
       mD.addFirst(i);
+      System.out.println(mD);
+    }
+    for (int i = 0; i < 20; i++) {
+      mD.removeFirst();
       System.out.println(mD);
     }
 
