@@ -24,24 +24,22 @@ public class MyDeque<E>{
   }
 
   public String toString(){
-    String out = "[";
-    if (size == 0) return "[]";
+    String out = "{";
+    if (size == 0) return "{}";
     if (end <= start) {
       for (int i = start; i < data.length; i++) {
-        out+= data[i] + ", ";
+        out+= data[i] + " ";
       }
       for (int i = 0; i <= end; i++) {
-        if (i == end) out+= data[i];
-        else out+= data[i] + ", ";
+        out+= data[i] + " ";
       }
     }
     else {
       for (int i = start; i <= end; i++) {
-        if (i == end) out+= data[i];
-        else out+= data[i] + ", ";
+        out+= data[i] + " ";
       }
     }
-    out += "]";
+    out += "}";
     return out;
   }
 
@@ -117,23 +115,22 @@ public class MyDeque<E>{
   public E removeFirst(){
     if (size == 0) throw new NoSuchElementException("deque is empty");
     E removed = data[start];
-    if (start == data.length -1) {
+    if (start == data.length -1 && size != 1) {
       start = 0;
     }
-    else start++;
+    else if (size != 1) {
+      start++;
+    }
     size--;
     return removed;
   }
   public E removeLast(){
     if (size == 0) throw new NoSuchElementException("deque is empty");
     E removed = data[end];
-    if (end == data.length -1) {
-      end = 0;
+    if (end == 0 && size != 1) end = data.length -1;
+    else if (size != 1) {
+      end--;
     }
-    else if (end == 0) {
-      end = data.length -1;
-    }
-    else end--;
     size--;
     return removed;
   }
@@ -148,7 +145,7 @@ public class MyDeque<E>{
 
 
   public static void main(String[] args) {
-    MyDeque<Integer> s = new MyDeque();
+    MyDeque<Integer> s = new MyDeque<Integer>();
     s.addLast(5);
     s.addLast(12);
     s.addLast(2);
@@ -180,8 +177,8 @@ public class MyDeque<E>{
     s.removeLast();
     System.out.println(s); //[5,12]
     s.removeLast();
-    System.out.println("Size : " +  s.size); //1
     System.out.println(s); //[5]
+    System.out.println("Size : " +  s.size); //1
     s.removeFirst();
     System.out.println(s); //[]
 
