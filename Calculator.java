@@ -2,31 +2,35 @@ public class Calculator{
     /*Evaluate a postfix expression stored in s.
      *Assume valid postfix notation, separated by spaces.
      */
+    private static String[] ops = {"+", "-", "*", "/", "%"};
+
+    private static boolean isOp(String token) {
+      for (int i = 0; i < ops.length; i++) {
+        if (token.equals(ops[i])) return true;
+      }
+      return false;
+    }
+
+    private static double operate(double a, double b, String op) {
+      if (op.equals("+")) return a + b;
+      else if (op.equals("-")) return a - b;
+      else if (op.equals("*")) return a * b;
+      else if (op.equals("/")) return a / b;
+      else return a % b;
+    }
+
     public static double eval(String s){
       String[] tokens = s.split(" ");
-      MyDeque<Double> st = new MyDeque<Double>();
-      for (int i = 2; i < tokens.length; i++) {
+      MyDeque<Double> stack = new MyDeque<Double>();
+      for (int i = 0; i < tokens.length; i++) {
         //System.out.println(tokens[i]);
         //if the token is an operator
-        if (tokens[i].equals("*") ||
-            tokens[i].equals("/") ||
-            tokens[i].equals("-") ||
-            tokens[i].equals("+") ||
-            tokens[i].equals("%")   ) {
-                st.addLast(Double.parseDouble(tokens[i-2]));
-                st.addLast(Double.parseDouble(tokens[i-1]));
-                double ans = 0.0;
-                if (tokens[i].equals("*")) ans = st.removeFirst() * st.removeFirst();
-                if (tokens[i].equals("-")) ans = st.removeFirst() - st.removeFirst();
-                if (tokens[i].equals("+")) ans = st.removeFirst() + st.removeFirst();
-                if (tokens[i].equals("/")) ans = st.removeFirst() / st.removeFirst();
-                if (tokens[i].equals("%")) ans = st.removeFirst() % st.removeFirst();
-                System.out.println(st);
-                st.addLast(ans);
-                System.out.println(st);
-                i++;
-              }
-            }
+        if (!isOp(tokens[i]) {
+          stack.addLast(Double.parseDouble(tokens[i]))
+        }
+        else {
+          operate
+        }
       return 0.0;
     }
 
