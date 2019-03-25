@@ -12,11 +12,12 @@ public class Calculator{
     }
 
     private static double operate(double a, double b, String op) {
-      if (op.equals("+")) return a + b;
-      else if (op.equals("-")) return a - b;
-      else if (op.equals("*")) return a * b;
-      else if (op.equals("/")) return a / b;
-      else return a % b;
+      System.out.println(b + op + a);
+      if (op.equals("+")) return b + a;
+      else if (op.equals("-")) return b - a;
+      else if (op.equals("*")) return b * a;
+      else if (op.equals("/")) return b / a;
+      else return b % a;
     }
 
     public static double eval(String s){
@@ -25,20 +26,26 @@ public class Calculator{
       for (int i = 0; i < tokens.length; i++) {
         //System.out.println(tokens[i]);
         //if the token is an operator
-        if (!isOp(tokens[i]) {
-          stack.addLast(Double.parseDouble(tokens[i]))
+        if (!isOp(tokens[i])) {
+          stack.addLast(Double.parseDouble(tokens[i]));
         }
         else {
-          operate
+          double ans = operate(stack.removeLast(), stack.removeLast(), tokens[i]);
+          stack.addLast(ans);
         }
-      return 0.0;
+        System.out.println(stack);
+      }
+      return stack.removeFirst();
     }
 
 
     public static void main(String[] args) {
-      eval("10 2.0 +"); //is 12.0
-      eval("11 3 - 4 + 2.5 *"); //is 30.0
-      eval("8 2 + 99 9 - * 2 + 9 -"); //is 893.0
-      eval("1 2 3 4 5 + * - -"); //is 26.0
+      System.out.println(eval("10 2.0 +")); //is 12.0 CORRECT
+      System.out.println();
+      System.out.println(eval("11 3 - 4 + 2.5 *")); //is 30.0 CORRECT
+      System.out.println();
+      System.out.println(eval("8 2 + 99 9 - * 2 + 9 -")); //is 893.0 CORRECT
+      System.out.println();
+      System.out.println(eval("1 2 3 4 5 + * - -")); //is 26.0 CORRECT
     }
 }
