@@ -4,9 +4,29 @@ public class Calculator{
      */
     public static double eval(String s){
       String[] tokens = s.split(" ");
-      for (int i = 0; i < tokens.length; i++) {
-        System.out.println(tokens[i]);
-      }
+      MyDeque<Double> st = new MyDeque<Double>();
+      for (int i = 2; i < tokens.length; i++) {
+        //System.out.println(tokens[i]);
+        //if the token is an operator
+        if (tokens[i].equals("*") ||
+            tokens[i].equals("/") ||
+            tokens[i].equals("-") ||
+            tokens[i].equals("+") ||
+            tokens[i].equals("%")   ) {
+                st.addLast(Double.parseDouble(tokens[i-2]));
+                st.addLast(Double.parseDouble(tokens[i-1]));
+                double ans = 0.0;
+                if (tokens[i].equals("*")) ans = st.removeFirst() * st.removeFirst();
+                if (tokens[i].equals("-")) ans = st.removeFirst() - st.removeFirst();
+                if (tokens[i].equals("+")) ans = st.removeFirst() + st.removeFirst();
+                if (tokens[i].equals("/")) ans = st.removeFirst() / st.removeFirst();
+                if (tokens[i].equals("%")) ans = st.removeFirst() % st.removeFirst();
+                System.out.println(st);
+                st.addLast(ans);
+                System.out.println(st);
+                i++;
+              }
+            }
       return 0.0;
     }
 
